@@ -1,0 +1,27 @@
+<section class="p-4 shadow rounded bg-white">
+<form [formGroup]="dataForm" (ngSubmit)="sendData()">
+  <h2 class="text-center text-capitalize fs-3">note data</h2>
+    <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="Ex. note 1" formControlName="title" >
+
+        <mat-error *ngIf="dataForm.get('title')?.hasError('required')">
+          title is <strong>required</strong>
+        </mat-error>
+
+      </mat-form-field>
+    
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Leave a note</mat-label>
+        <textarea matInput placeholder="Ex. It makes me feel..." formControlName="desc"></textarea>
+
+        <mat-error *ngIf="dataForm.get('desc')?.hasError('required')">
+          description is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+    <button mat-raised-button class="mx-auto " [disabled]="dataForm.invalid" *ngIf="!data" color="primary">Add Note</button>
+    <button mat-raised-button class="mx-auto " [disabled]="dataForm.invalid" *ngIf="data" color="warn">update Note</button>
+
+</form>
+</section>

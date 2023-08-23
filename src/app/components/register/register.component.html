@@ -1,0 +1,131 @@
+<section class="d-flex justify-content-center align-items-center">
+  <div
+    class="row g-0 shadow-lg rounded overflow-hidden w-100 align-items-center"
+  >
+    <div class="col-md-8 d-none d-md-block">
+      <div class="image"></div>
+    </div>
+    <div class="col-md-4">
+      <h1 class="text-center text-capitalize fs-2">
+        <span class="text-info">R</span>egister
+      </h1>
+      <form
+        class="px-4"
+        [formGroup]="registerForm"
+        (ngSubmit)="handleRegisterForm(registerForm)"
+      >
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>first name</mat-label>
+          <input
+            formControlName="first_name"
+            type="text"
+            matInput
+            placeholder="enter your first name"
+          />
+
+          <mat-error
+            *ngIf="registerForm.get('first_name')?.hasError('required')"
+          >
+            first name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>last name</mat-label>
+          <input
+            formControlName="last_name"
+            type="text"
+            matInput
+            placeholder="enter your last name"
+          />
+
+          <mat-error
+            *ngIf="registerForm.get('last_name')?.hasError('required')"
+          >
+            last name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>email</mat-label>
+          <input
+            formControlName="email"
+            type="email"
+            matInput
+            placeholder="enter a valid email"
+          />
+
+          <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
+            email is <strong>required</strong>
+          </mat-error>
+
+          <mat-error *ngIf="registerForm.get('email')?.hasError('pattern')">
+            email must be ended with <strong>.com or .net</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>password</mat-label>
+                    <input formControlName="password" type="password" matInput  placeholder="password">
+                 
+                    <mat-error *ngIf="registerForm.get('password')?.hasError('required') ">
+                        password is <strong>required</strong>
+                    </mat-error>
+
+                    <mat-error *ngIf="registerForm.get('password')?.hasError('pattern') ">
+                        password must started with<strong> capital letter followed with 5 to 10 characters </strong>
+                      </mat-error>
+  
+                  </mat-form-field> -->
+
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>password</mat-label>
+          <input
+            formControlName="password"
+            matInput
+            [type]="hide ? 'password' : 'text'"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+            type="button"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+
+          <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
+            password is <strong>required</strong>
+          </mat-error>
+
+          <mat-error *ngIf="registerForm.get('password')?.hasError('pattern')">
+            password must started with<strong>
+              capital letter followed with 5 to 10 characters
+            </strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>age</mat-label>
+          <input
+            formControlName="age"
+            type="number"
+            matInput
+            placeholder="enter your age"
+          />
+
+          <mat-error *ngIf="registerForm.get('age')?.hasError('required')">
+            age is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <button [disabled]="registerForm.invalid" class="w-100" mat-raised-button color="primary">
+            <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
+            <span *ngIf="!isLoading">Register</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>

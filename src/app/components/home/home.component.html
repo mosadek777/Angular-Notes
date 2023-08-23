@@ -1,0 +1,66 @@
+
+
+
+
+<header class="py-4 ">
+    <ul class="nav nav-pills hstack justify-content-end my-3">
+        <li class="nav-item">
+       <button mat-raised-button (click)=" logOut()"  color="warn">LogOut</button>
+        </li>
+    </ul>
+    <div class="col-md-10 mx-auto fa-fade" *ngIf="notes.length">
+       
+        <mat-form-field class="w-100" appearance="outline">
+          
+            <mat-label>Search....</mat-label>
+            <input matInput type="text" [(ngModel)]="value">
+            <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    
+    </div>
+    <div class="hstack justify-content-end">
+
+        <button mat-raised-button (click)="openDialog()" color="primary">Add Note</button>
+    </div>
+</header>
+
+
+<section class="row row-cols-1 row-cols-sm-2 row-cols-md-3  g-4">
+    <div class="col" *ngFor="let note of notes |filter:value  index as index">
+        <div class="card shadow  h-100">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
+                class="position-absolute end-0">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="setData(note)">
+                    <mat-icon class="text-primary">edit</mat-icon>
+                    <span>Edit</span>
+                </button>
+
+                <button mat-menu-item [swal]="deleteSwal">
+                    <mat-icon class="text-danger">delete</mat-icon>
+                    <span>Delete</span>
+                </button>
+                <swal
+                #deleteSwal
+                title="Delete {{ note.title }}?"
+                text="This cannot be undone"
+                icon="question"
+                [showCancelButton]="true"
+                [focusCancel]="true"
+                (confirm)="deleteNote(note._id,index)">
+              </swal>
+              
+             
+             </mat-menu>
+
+            <div class="card-body text-center text-capitalize">
+                <h3 class="px-3">{{note.title}}</h3>
+                <p class="text-muted">{{note.desc}}</p>
+            </div>
+        </div>
+    </div>
+</section>

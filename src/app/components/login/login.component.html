@@ -1,0 +1,79 @@
+<section class="d-flex justify-content-center align-items-center">
+    <div
+      class="row g-0 shadow-lg rounded overflow-hidden w-100 align-items-center"
+    >
+      <div class="col-md-8 d-none d-md-block">
+        <div class="image"></div>
+      </div>
+      <div class="col-md-4">
+        <h1 class="text-center text-capitalize fs-2">
+          <span class="text-info">L</span>ogin
+        </h1>
+        <form
+          class="px-4"
+          [formGroup]="loginForm"
+          (ngSubmit)="handleloginForm(loginForm)"
+        >
+
+  
+
+  
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>email</mat-label>
+            <input
+              formControlName="email"
+              type="email"
+              matInput
+              placeholder="enter a valid email"
+            />
+  
+            <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+              email is <strong>required</strong>
+            </mat-error>
+  
+            <mat-error *ngIf="loginForm.get('email')?.hasError('pattern')">
+              email must be ended with <strong>.com or .net</strong>
+            </mat-error>
+          </mat-form-field>
+  
+
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>password</mat-label>
+            <input
+              formControlName="password"
+              matInput
+              [type]="hide ? 'password' : 'text'"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+              type="button"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+  
+            <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+              password is <strong>required</strong>
+            </mat-error>
+  
+            <mat-error *ngIf="loginForm.get('password')?.hasError('pattern')">
+              password must started with<strong>
+                capital letter followed with 5 to 10 characters
+              </strong>
+            </mat-error>
+          </mat-form-field>
+  
+
+  
+          <button [disabled]="loginForm.invalid" class="w-100" mat-raised-button color="warn">
+              <i *ngIf="isLoading" class="fas fa-spinner fa-spin"></i>
+              <span *ngIf="!isLoading">Login</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+  
