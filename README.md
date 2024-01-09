@@ -32,4 +32,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 live link 
-https://github.com/mosadek777/Ecommerce-website
+https://mosadek777.github.io/Angular-Notes/
